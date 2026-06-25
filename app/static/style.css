@@ -1,0 +1,36 @@
+/* style.css */
+
+body {
+    font-family: 'Poppins', sans-serif;
+    background: #f5f7fa;
+}
+
+/* Glass Navbar */
+.navbar {
+    backdrop-filter: blur(10px);
+    background: rgba(0,0,0,0.7) !important;
+}
+
+/* Hero */
+.hero {
+    height: 100vh;
+    background: linear-gradient(rgba(0,0,0,0.6), rgba(0,0,0,0.6)),
+    url("https://images.unsplash.com/photo-1555244162-803834f70033");
+    background-size: cover;
+    background-position: center;
+}
+
+/* Glass Cards */
+.glass-card {
+    background: rgba(255,255,255,0.2);
+    backdrop-filter: blur(15px);
+    border-radius: 15px;
+    color: black;
+    box-shadow: 0 8px 32px rgba(0,0,0,0.2);
+}
+
+/* Cards hover */
+.card:hover {
+    transform: scale(1.05);
+    transition: 0.3s;
+}

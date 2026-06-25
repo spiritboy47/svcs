@@ -1,0 +1,39 @@
+<!-- admin_dashboard.html -->
+
+{% extends "base.html" %}
+
+{% block content %}
+
+<div class="container py-5">
+    <h2>Bookings Dashboard</h2>
+    <a href="/admin/logout" class="btn btn-danger">Logout</a>
+
+    <table class="table table-bordered mt-4">
+        <tr>
+            <th>Name</th>
+            <th>Email</th>
+            <th>Event</th>
+            <th>Guests</th>
+            <th>Date</th>
+            <th>Actions</th>
+        </tr>
+
+        {% for b in bookings %}
+        <tr>
+            <td>{{ b.name }}</td>
+            <td>{{ b.email }}</td>
+            <td>{{ b.event_type }}</td>
+            <td>{{ b.guests }}</td>
+            <td>{{ b.date }}</td>
+            <td>
+                <a href="/admin/edit/{{ b.id }}" class="btn btn-sm btn-primary">Edit</a>
+                <form action="/admin/delete/{{ b.id }}" method="post" style="display:inline;">
+                    <button type="submit" class="btn btn-sm btn-danger" onclick="return confirm('Delete this booking?')">Delete</button>
+                </form>
+            </td>
+        </tr>
+        {% endfor %}
+    </table>
+</div>
+
+{% endblock %}

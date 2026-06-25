@@ -1,0 +1,22 @@
+version: "3.9"
+
+services:
+  svcs:
+    build:
+      context: .
+      dockerfile: Dockerfile
+
+    container_name: svcs-catering
+
+    ports:
+      - "8000:8000"
+
+    env_file:
+      - .env
+
+    volumes:
+      - ./catering.db:/app/catering.db
+      - ./app/templates:/app/app/templates
+      - ./app/static:/app/app/static
+
+    restart: unless-stopped

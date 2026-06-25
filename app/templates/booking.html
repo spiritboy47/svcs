@@ -1,0 +1,227 @@
+{% extends "base.html" %}
+
+{% block content %}
+
+<div class="container d-flex justify-content-center align-items-center"
+     style="min-height:90vh;">
+
+    <div class="card shadow-lg p-4"
+         style="width:100%;max-width:550px;">
+
+        <h3 class="text-center mb-4">
+            🍽 Book Catering Service
+        </h3>
+
+        <form
+            id="bookingForm"
+            method="post"
+            novalidate
+        >
+
+            <!-- NAME -->
+
+            <input
+                type="text"
+                class="form-control mb-3"
+                name="name"
+                placeholder="Full Name"
+                minlength="2"
+                maxlength="50"
+                required
+            >
+
+            <!-- EMAIL -->
+
+            <input
+                type="email"
+                class="form-control mb-3"
+                name="email"
+                placeholder="Email Address"
+                required
+            >
+
+            <!-- PHONE -->
+
+            <div class="input-group mb-3">
+
+                <span class="input-group-text">
+                    +91
+                </span>
+
+                <input
+                    type="tel"
+                    class="form-control"
+                    name="phone"
+                    placeholder="9876543210"
+                    maxlength="10"
+                    minlength="10"
+                    pattern="[0-9]{10}"
+                    required
+                >
+
+            </div>
+
+            <!-- EVENT -->
+
+            <select
+                class="form-control mb-3"
+                name="event_type"
+                required
+            >
+
+                <option value="">
+                    Select Event Type
+                </option>
+
+                <option>
+                    Wedding
+                </option>
+
+                <option>
+                    Corporate
+                </option>
+
+                <option>
+                    Birthday
+                </option>
+
+            </select>
+
+            <!-- GUESTS -->
+
+            <input
+                type="number"
+                class="form-control mb-3"
+                name="guests"
+                placeholder="Guests"
+                min="1"
+                max="5000"
+                required
+            >
+
+            <!-- DATE -->
+
+            <input
+                type="date"
+                class="form-control mb-3"
+                id="event_date"
+                name="date"
+                required
+            >
+
+            <!-- TIME SLOT -->
+
+            <select
+                class="form-control mb-3"
+                name="time_slot"
+                required
+            >
+
+                <option value="">
+                    Select Time Slot
+                </option>
+
+                <option>
+                    Morning
+                </option>
+
+                <option>
+                    Afternoon
+                </option>
+
+                <option>
+                    Night
+                </option>
+
+            </select>
+
+            <!-- MESSAGE -->
+
+            <textarea
+                class="form-control mb-3"
+                name="message"
+                rows="3"
+                maxlength="500"
+                placeholder="Additional Message"
+            ></textarea>
+
+            <button
+                type="submit"
+                class="btn btn-primary w-100"
+            >
+                Submit Booking
+            </button>
+
+        </form>
+
+    </div>
+
+</div>
+
+<script>
+
+const dateInput =
+document.getElementById("event_date");
+
+const minDate =
+new Date();
+
+minDate.setDate(
+    minDate.getDate() + 3
+);
+
+const yyyy =
+minDate.getFullYear();
+
+const mm =
+String(
+    minDate.getMonth()+1
+).padStart(2,'0');
+
+const dd =
+String(
+    minDate.getDate()
+).padStart(2,'0');
+
+dateInput.min =
+`${yyyy}-${mm}-${dd}`;
+
+
+/* FORM VALIDATION */
+
+document
+.getElementById("bookingForm")
+.addEventListener(
+"submit",
+function(e){
+
+    if(!this.checkValidity()){
+
+        e.preventDefault();
+
+        alert(
+          "Please fill all fields correctly."
+        );
+
+        return;
+    }
+
+});
+
+</script>
+
+
+{% if error %}
+<script>
+alert("❌ {{ error }}");
+</script>
+{% endif %}
+
+
+{% if success %}
+<script>
+alert("✅ {{ success }}");
+</script>
+{% endif %}
+
+{% endblock %}

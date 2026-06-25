@@ -1,0 +1,76 @@
+{% extends "base.html" %}
+
+{% block content %}
+
+<div class="container py-5">
+    <h2>Edit Booking</h2>
+
+    <a href="/admin/dashboard" class="btn btn-secondary mb-3">Back to Dashboard</a>
+
+    <form method="post">
+        <div class="mb-2">
+            <label class="form-label">Name</label>
+            <input class="form-control" name="name" value="{{ booking.name }}" required>
+        </div>
+
+        <div class="mb-2">
+            <label class="form-label">Email</label>
+            <input class="form-control" name="email" value="{{ booking.email }}" required>
+        </div>
+
+        <div class="mb-2">
+            <label class="form-label">Phone</label>
+            <input class="form-control" name="phone" value="{{ booking.phone }}" required>
+        </div>
+
+        <div class="mb-2">
+            <label class="form-label">Event Type</label>
+            <select class="form-select" name="event_type" required>
+                <option value="Wedding" {% if booking.event_type == 'Wedding' %}selected{% endif %}>Wedding</option>
+                <option value="Corporate" {% if booking.event_type == 'Corporate' %}selected{% endif %}>Corporate</option>
+                <option value="Birthday" {% if booking.event_type == 'Birthday' %}selected{% endif %}>Birthday</option>
+            </select>
+        </div>
+
+        <div class="mb-2">
+            <label class="form-label">Guests</label>
+            <input class="form-control" type="number" name="guests" value="{{ booking.guests }}" required>
+        </div>
+
+        <div class="mb-2">
+            <label class="form-label">Date (DD/MM/YYYY shown; HTML sends YYYY-MM-DD)</label>
+            <input class="form-control" type="date" name="date" required value="{{ date_for_input }}">
+        </div>
+
+        <div class="mb-2">
+            <label class="form-label">Time Slot</label>
+            <select class="form-select" name="time_slot" required>
+                <option value="Morning" {% if booking.time_slot == 'Morning' %}selected{% endif %}>Morning</option>
+                <option value="Afternoon" {% if booking.time_slot == 'Afternoon' %}selected{% endif %}>Afternoon</option>
+                <option value="Night" {% if booking.time_slot == 'Night' %}selected{% endif %}>Night</option>
+            </select>
+        </div>
+
+        <div class="mb-2">
+            <label class="form-label">Message</label>
+            <textarea class="form-control" name="message" rows="3">{{ booking.message or '' }}</textarea>
+        </div>
+
+        <button class="btn btn-primary w-100 mt-2" type="submit">Update Booking</button>
+    </form>
+</div>
+
+{% if error %}
+<script>
+    alert("❌ {{ error }}");
+</script>
+{% endif %}
+
+{% if success %}
+<script>
+    alert("✅ {{ success }}");
+</script>
+{% endif %}
+
+{% endblock %}
+
